@@ -1,5 +1,5 @@
-require "bundler/setup"
-require "charyf_base_dispatcher"
+require 'bundler/setup'
+require 'charyf/engine/dispatcher/base_dispatcher'
 
 RSpec.configure do |config|
   # Enable flags like --only-failures and --next-failure
