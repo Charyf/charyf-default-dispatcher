@@ -18,13 +18,14 @@ module Charyf
           context.request = request
 
           # TODO process session as well
-          context.session = session_processor.process(request)
+          context.session = session_processor.get.process(request)
 
           # Get intents
-          intents = intent_processors.collect do |processor|
+          intents = intent_processors.collect do |processor_klass|
+            processor = processor_klass.get_for(context.session ? context.session.skill : nil)
+
             processor.determine(
-                request,
-                context.session ? context.session.skill : nil
+                request
             )
           end.collect do |intent|
             [intent, intent.alternatives].flatten
